@@ -55,7 +55,7 @@ const service: ITagService = {
         if (typeof token.name !== "string" || !token.name.trim() || typeof token.symbol !== "string") throw new Error("Missing contract token metadata");
         const name = token.name.trim().replace(/\s+/g, " ");
         if (/[`\r\n]|\*\*|<[^>]+>/.test(name + token.symbol)) throw new Error("Metadata cannot produce a plain-text tag");
-        const label = (name.length > 34 ? name.slice(0, 31) + "..." : name) + ` (${address.slice(2, 12)})`;
+        const label = name.length > 50 ? name.slice(0, 47) + "..." : name;
         if (labels.has(label)) throw new Error("Ambiguous tag label");
         labels.add(label);
         tags.push({ "Contract Address": `eip155:43114:${address}`, "Project Name": "BENQI", "Public Name Tag": label,
